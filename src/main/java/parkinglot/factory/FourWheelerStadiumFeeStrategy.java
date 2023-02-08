@@ -10,9 +10,9 @@ public class FourWheelerStadiumFeeStrategy implements ParkingFeeStrategy {
 
         if (hoursParked >= 0 && hoursParked <= 4) {
             totalFee = 60;
-        } else if (hoursParked >= 4 && hoursParked <= 12) {
+        } else if (hoursParked > 4 && hoursParked <= 12) {
             totalFee = 120 + 60;
-        } else if (hoursParked >= 12) {
+        } else if (hoursParked > 12) {
             totalFee = 200 * (hoursParked - 12) + 180;
         }
 

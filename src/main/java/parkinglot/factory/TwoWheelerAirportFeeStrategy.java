@@ -2,7 +2,7 @@ package parkinglot.factory;
 
 import parkinglot.component.ParkingTicket;
 
-public class TwoWheelerAirportFeeStartegy implements ParkingFeeStrategy {
+public class TwoWheelerAirportFeeStrategy implements ParkingFeeStrategy {
     @Override
     public double getFee(ParkingTicket parkingTicket, String exitDateTime) {
         double totalFee = 0.0;
@@ -12,9 +12,9 @@ public class TwoWheelerAirportFeeStartegy implements ParkingFeeStrategy {
             totalFee = 0;
         } else if (hoursParked >= 1 && hoursParked <= 8) {
             totalFee = 40;
-        } else if (hoursParked >= 8 && hoursParked <= 24) {
+        } else if (hoursParked > 8 && hoursParked <= 24) {
             totalFee = 60;
-        } else if (hoursParked >= 24) {
+        } else if (hoursParked > 24) {
             totalFee = 80 * Math.ceil(hoursParked / 24.0);
         }
 

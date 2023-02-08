@@ -14,7 +14,7 @@ public class FeeModelFactory {
         } else if(feeModel == AIRPORT){
             return new AirportFeeStrategyFactory();
         } else {
-            throw new IllegalArgumentException("Given Fee Model not supported.");
+            throw new IllegalArgumentException("Given Fee Model not supported");
         }
     }
 }

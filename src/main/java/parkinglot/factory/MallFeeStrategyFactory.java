@@ -12,7 +12,7 @@ public class MallFeeStrategyFactory implements FeeModelStrategyFactory {
         } else if(vehicle == CAR || vehicle == SUV){
             return new FourWheelerMallFeeStrategy();
         } else if(vehicle == BUS || vehicle == TRUCK){
-            return new FourWheelerMallFeeStrategy();
+            return new SixWheelerMallFeeStrategy();
         } else {
             throw new IllegalArgumentException("Vehicle not allowed in Mall parking.");
         }

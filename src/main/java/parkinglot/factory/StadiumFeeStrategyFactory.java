@@ -8,11 +8,11 @@ import static parkinglot.model.Vehicle.*;
 public class StadiumFeeStrategyFactory implements FeeModelStrategyFactory {
     public ParkingFeeStrategy getParkingFeeStrategy(Vehicle vehicle) {
         if(vehicle == MOTORCYCLE) {
-            return new FourWheelerStadiumFeeStrategy();
+            return new TwoWheelerStadiumFeeStrategy();
         } else if(vehicle == CAR || vehicle == SUV){
-            return new FourWheelerAirportFeeStrategy();
+            return new FourWheelerStadiumFeeStrategy();
         } else {
-            throw new IllegalArgumentException("Vehicle not allowed in Stadium parking.");
+            throw new IllegalArgumentException("Vehicle not allowed in Stadium parking");
         }
     }
 }

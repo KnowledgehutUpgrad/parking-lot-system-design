@@ -3,11 +3,11 @@ package parkinglot.model;
 public class ParkingSpot {
     private final int id;
     private boolean isOccupied;
-    private final Vehicle type;
+    private final Vehicle vehicleType;
 
-    public ParkingSpot(int id, Vehicle type) {
+    public ParkingSpot(int id, Vehicle vehicleType) {
         this.id = id;
-        this.type = type;
+        this.vehicleType = vehicleType;
         isOccupied = false;
     }
 
@@ -15,8 +15,8 @@ public class ParkingSpot {
         return id;
     }
 
-    public Vehicle getType() {
-        return type;
+    public Vehicle getVehicleType() {
+        return vehicleType;
     }
 
     public boolean isOccupied() {

@@ -1,33 +1,39 @@
 package parkinglot.component;
 
-import parkinglot.model.Vehicle;
 import parkinglot.manager.ParkingSpotManager;
+import parkinglot.manager.TicketManager;
 import parkinglot.model.ParkingSpot;
+import parkinglot.model.Vehicle;
 
 import java.util.Optional;
 
 public class ExitGate {
-    public static final String INVALID_OPERATION = "Invalid Operation";
-    private final ExitTicket exitTicket;
     private final ParkingSpotManager parkingSpotManager;
+    private final TicketManager ticketManager;
 
-    public ExitGate(ExitTicket exitTicket, ParkingSpotManager parkingSpotManager) {
-        this.exitTicket = exitTicket;
+    public ExitGate(ParkingSpotManager parkingSpotManager, TicketManager ticketManager) {
         this.parkingSpotManager = parkingSpotManager;
+        this.ticketManager = ticketManager;
     }
 
-    public String exit(Vehicle vehicle, ParkingTicket parkingTicket) {
-        Optional<ParkingSpot> parkingSpot = parkingSpotManager.findParkingSpot(vehicle, parkingTicket.getSpotId());
-        if (parkingSpot.isPresent())
-            return vacateSpot(vehicle, parkingSpot.get(), parkingTicket);
-        else {
-            return INVALID_OPERATION;
+    public ExitTicket exit(Vehicle vehicle, int ticketNumber) {
+        Optional<ParkingTicket> parkingTicket = ticketManager.findParkingTicketBy(ticketNumber);
+        if (parkingTicket.isPresent()) {
+            ParkingTicket parkingTicketValue = parkingTicket.get();
+            Optional<ParkingSpot> parkingSpot = parkingSpotManager.findParkingSpot(vehicle, parkingTicketValue.getSpotId());
+            if (parkingSpot.isPresent()) {
+                return vacateSpot(vehicle, parkingSpot.get(), parkingTicketValue);
+            } else {
+                throw new IllegalArgumentException("Parking spot not found for the given ticket number");
+            }
+        } else {
+            throw new IllegalArgumentException("Invalid parking ticket number");
         }
     }
 
-    private String vacateSpot(Vehicle vehicle, ParkingSpot parkingSpot, ParkingTicket parkingTicket) {
+    private ExitTicket vacateSpot(Vehicle vehicle, ParkingSpot parkingSpot, ParkingTicket parkingTicket) {
         parkingSpot.vacate();
-        return exitTicket.generateExitTicket(vehicle, parkingTicket);
+        return ticketManager.getExitTicket().generateExitTicket(vehicle, parkingTicket);
     }
 }
 

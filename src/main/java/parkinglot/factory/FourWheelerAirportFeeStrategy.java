@@ -10,9 +10,9 @@ public class FourWheelerAirportFeeStrategy implements ParkingFeeStrategy {
 
         if (hoursParked >= 0 && hoursParked <= 12) {
             totalFee = 60;
-        } else if (hoursParked >= 12 && hoursParked <= 24) {
+        } else if (hoursParked > 12 && hoursParked <= 24) {
             totalFee = 80;
-        } else if (hoursParked >= 24) {
+        } else if (hoursParked > 24) {
             totalFee = 100 * Math.ceil(hoursParked / 24.0);
         }
 

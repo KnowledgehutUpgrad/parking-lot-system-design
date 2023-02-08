@@ -23,6 +23,16 @@ class ParkingSpotManagerTest {
     }
 
     @Test
+    void shouldReturnTrueForSimilarVehicleType() {
+        ParkingSpot parkingSpot = new ParkingSpot(1, MOTORCYCLE);
+        ParkingSpotManager parkingSpotManager = new ParkingSpotManager(List.of(parkingSpot));
+
+        Optional<ParkingSpot> availableParkingSpot = parkingSpotManager.findAvailableParkingSpot(SCOOTER);
+
+        assertTrue(availableParkingSpot.isPresent());
+    }
+
+    @Test
     void shouldReturnFalseForUnavailableParkingSpotForGivenVehicle() {
         ParkingSpot parkingSpot = new ParkingSpot(1, MOTORCYCLE);
         ParkingSpotManager parkingSpotManager = new ParkingSpotManager(List.of(parkingSpot));
@@ -41,7 +51,7 @@ class ParkingSpotManagerTest {
         Optional<ParkingSpot> availableParkingSpot = parkingSpotManager.findAvailableParkingSpot(CAR);
 
         assertTrue(availableParkingSpot.isPresent());
-        assertEquals(CAR, availableParkingSpot.get().getType());
+        assertEquals(CAR, availableParkingSpot.get().getVehicleType());
     }
 
     @Test
@@ -53,6 +63,6 @@ class ParkingSpotManagerTest {
         Optional<ParkingSpot> availableParkingSpot = parkingSpotManager.findParkingSpot(CAR, 202);
 
         assertTrue(availableParkingSpot.isPresent());
-        assertEquals(CAR, availableParkingSpot.get().getType());
+        assertEquals(CAR, availableParkingSpot.get().getVehicleType());
     }
 }

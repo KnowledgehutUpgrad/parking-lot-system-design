@@ -1,7 +1,7 @@
 package parkinglot.factory;
 
 import parkinglot.component.ParkingTicket;
-import util.LocalDateTimeUtil;
+import parkinglot.util.LocalDateTimeUtil;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;

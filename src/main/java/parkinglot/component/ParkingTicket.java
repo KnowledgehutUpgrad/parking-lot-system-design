@@ -1,23 +1,26 @@
 package parkinglot.component;
 
-import util.LocalDateTimeUtil;
+import parkinglot.util.LocalDateTimeUtil;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class ParkingTicket extends Ticket {
     private String entryDateTime;
     private int spotId;
 
-    public ParkingTicket(LocalDateTimeUtil localDateTimeUtil) {
-        super(localDateTimeUtil);
+    public ParkingTicket(LocalDateTimeUtil localDateTimeUtil, AtomicInteger atomicInteger) {
+        super(localDateTimeUtil, atomicInteger);
     }
 
-    public String generateEntryTicket(int spotId) {
+    public ParkingTicket generateEntryTicket(int spotId) {
         this.entryDateTime = localDateTimeUtil.getLocalDateTime();
         this.spotId = spotId;
 
-        return "Parking Ticket:\n" +
-                "Ticket Number: " + number.incrementAndGet() + "\n" +
+        System.out.println("Parking Ticket:\n" +
+                "Ticket Number: " + ticketNumber + "\n" +
                 "Spot Number: " + spotId + "\n" +
-                "Entry Date-time: " + entryDateTime;
+                "Entry Date-time: " + entryDateTime);
+        return this;
     }
 
     public String getEntryDateTime() {

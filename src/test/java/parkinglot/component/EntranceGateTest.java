@@ -1,51 +1,52 @@
 package parkinglot.component;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import parkinglot.manager.ParkingSpotManager;
+import parkinglot.manager.TicketManager;
 import parkinglot.model.ParkingSpot;
 
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static parkinglot.model.Vehicle.MOTORCYCLE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 class EntranceGateTest {
-    @Test
-    void shouldCallParkingSpotManagerToFindAvailableParkingSpot() {
-        ParkingTicket mockParkingTicket = mock(ParkingTicket.class);
-        ParkingSpotManager mockParkingSpotManager = mock(ParkingSpotManager.class);
-        EntranceGate entranceGate = new EntranceGate(mockParkingTicket, mockParkingSpotManager);
-        when(mockParkingSpotManager.findAvailableParkingSpot(MOTORCYCLE))
+    private final ParkingSpotManager parkingSpotManager = mock(ParkingSpotManager.class);
+    private final TicketManager ticketManager = mock(TicketManager.class);
+    private final EntranceGate entranceGate = new EntranceGate(parkingSpotManager, ticketManager);
+    private final ParkingTicket parkingTicket = mock(ParkingTicket.class);
+
+    @BeforeEach
+    void setUpMock() {
+        when(parkingSpotManager.findAvailableParkingSpot(MOTORCYCLE))
                 .thenReturn(Optional.of(new ParkingSpot(1, MOTORCYCLE)));
-
-        entranceGate.findParkingSpace(MOTORCYCLE);
-
-        verify(mockParkingSpotManager).findAvailableParkingSpot(MOTORCYCLE);
+        when(ticketManager.getParkingTicket()).thenReturn(parkingTicket);
     }
 
     @Test
-    void shouldCallParkingTicketToOnSuccessfulParking() {
-        ParkingTicket mockParkingTicket = mock(ParkingTicket.class);
-        ParkingSpotManager mockParkingSpotManager = mock(ParkingSpotManager.class);
-        EntranceGate entranceGate = new EntranceGate(mockParkingTicket, mockParkingSpotManager);
-        when(mockParkingSpotManager.findAvailableParkingSpot(MOTORCYCLE))
-                .thenReturn(Optional.of(new ParkingSpot(1, MOTORCYCLE)));
+    void shouldCallParkingSpotManagerToFindAvailableParkingSpot() {
+        entranceGate.park(MOTORCYCLE);
 
-        entranceGate.findParkingSpace(MOTORCYCLE);
+        verify(parkingSpotManager).findAvailableParkingSpot(MOTORCYCLE);
+    }
 
-        verify(mockParkingTicket).generateEntryTicket(1);
+    @Test
+    void shouldCallTicketManagerToGenerateParkingTicket() {
+        entranceGate.park(MOTORCYCLE);
+
+        verify(ticketManager).getParkingTicket();
     }
 
     @Test
     void shouldReturnWarningMessageForUnsuccessfulParking() {
-        ParkingTicket mockParkingTicket = mock(ParkingTicket.class);
-        ParkingSpotManager mockParkingSpotManager = mock(ParkingSpotManager.class);
-        EntranceGate entranceGate = new EntranceGate(mockParkingTicket, mockParkingSpotManager);
-        when(mockParkingSpotManager.findAvailableParkingSpot(MOTORCYCLE)).thenReturn(Optional.empty());
+        when(parkingSpotManager.findAvailableParkingSpot(MOTORCYCLE)).thenReturn(Optional.empty());
 
-        String result = entranceGate.findParkingSpace(MOTORCYCLE);
+        IllegalArgumentException exception
+                = assertThrows(IllegalArgumentException.class, () -> entranceGate.park(MOTORCYCLE));
 
-        assertEquals("No space available", result);
+        assertEquals("No space available", exception.getMessage());
     }
 }

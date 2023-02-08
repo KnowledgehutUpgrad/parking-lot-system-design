@@ -1,32 +1,35 @@
 package parkinglot.component;
 
-import parkinglot.model.Vehicle;
 import parkinglot.manager.ParkingSpotManager;
+import parkinglot.manager.TicketManager;
 import parkinglot.model.ParkingSpot;
+import parkinglot.model.Vehicle;
 
 import java.util.Optional;
 
 public class EntranceGate {
     private static final String NO_SPACE_AVAILABLE = "No space available";
     private final ParkingSpotManager parkingSpotManager;
-    private final ParkingTicket parkingTicket;
+    private final TicketManager ticketManager;
 
-    public EntranceGate(ParkingTicket parkingTicket, ParkingSpotManager parkingSpotManager) {
-        this.parkingTicket = parkingTicket;
+    public EntranceGate(ParkingSpotManager parkingSpotManager, TicketManager ticketManager) {
         this.parkingSpotManager = parkingSpotManager;
+        this.ticketManager = ticketManager;
     }
 
-    public String findParkingSpace(Vehicle vehicle) {
+    public ParkingTicket park(Vehicle vehicle) {
         Optional<ParkingSpot> parkingSpot = parkingSpotManager.findAvailableParkingSpot(vehicle);
         if (parkingSpot.isPresent())
             return bookSpot(parkingSpot.get());
         else {
-            return NO_SPACE_AVAILABLE;
+            throw new IllegalArgumentException(NO_SPACE_AVAILABLE);
         }
     }
 
-    private String bookSpot(ParkingSpot parkingSpot) {
+    private ParkingTicket bookSpot(ParkingSpot parkingSpot) {
         parkingSpot.park();
-        return parkingTicket.generateEntryTicket(parkingSpot.getId());
+        return ticketManager
+                .getParkingTicket()
+                .generateEntryTicket(parkingSpot.getId());
     }
 }
