@@ -1,6 +1,9 @@
 package parkinglot.factory;
 
 import org.junit.jupiter.api.Test;
+import parkinglot.strategy.FourWheelerAirportFeeStrategy;
+import parkinglot.strategy.ParkingFeeStrategy;
+import parkinglot.strategy.TwoWheelerAirportFeeStrategy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

@@ -1,9 +1,9 @@
 package parkinglot.component;
 
 import parkinglot.factory.FeeModelFactory;
-import parkinglot.factory.ParkingFeeStrategy;
+import parkinglot.strategy.ParkingFeeStrategy;
 import parkinglot.model.FeeModel;
-import parkinglot.model.FeeModelStrategyFactory;
+import parkinglot.factory.FeeModelStrategyFactory;
 import parkinglot.model.Vehicle;
 import parkinglot.util.LocalDateTimeUtil;
 

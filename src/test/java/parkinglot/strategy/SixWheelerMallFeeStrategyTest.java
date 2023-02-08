@@ -1,7 +1,8 @@
-package parkinglot.factory;
+package parkinglot.strategy;
 
 import org.junit.jupiter.api.Test;
 import parkinglot.component.ParkingTicket;
+import parkinglot.strategy.SixWheelerMallFeeStrategy;
 import parkinglot.util.LocalDateTimeUtil;
 
 import java.time.LocalDateTime;
@@ -12,18 +13,18 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-class FourWheelerMallFeeStrategyTest {
+class SixWheelerMallFeeStrategyTest {
     @Test
     void shouldReturnTotalFee() {
-        FourWheelerMallFeeStrategy fourWheelerMallFeeModel = new FourWheelerMallFeeStrategy();
+        SixWheelerMallFeeStrategy sixWheelerMallFeeModel = new SixWheelerMallFeeStrategy();
         LocalDateTimeUtil localDateTimeUtil = mock(LocalDateTimeUtil.class);
         ParkingTicket parkingTicket = new ParkingTicket(localDateTimeUtil, mock(AtomicInteger.class));
         when(localDateTimeUtil.parseToLocalDateTIme(any()))
                 .thenReturn(LocalDateTime.of(2023, 2, 6, 9, 0))
                 .thenReturn(LocalDateTime.of(2023, 2, 6, 10, 0));
 
-        double actualFee = fourWheelerMallFeeModel.getFee(parkingTicket, "06-Feb-2023 10:00:00");
+        double actualFee = sixWheelerMallFeeModel.getFee(parkingTicket, "06-Feb-2023 10:00:00");
 
-        assertEquals(20.0, actualFee);
+        assertEquals(50.0, actualFee);
     }
 }

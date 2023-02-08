@@ -1,7 +1,6 @@
 package parkinglot.factory;
 
 import org.junit.jupiter.api.Test;
-import parkinglot.model.FeeModelStrategyFactory;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static parkinglot.model.FeeModel.*;

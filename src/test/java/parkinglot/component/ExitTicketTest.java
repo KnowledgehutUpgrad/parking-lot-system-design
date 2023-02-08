@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import parkinglot.factory.FeeModelFactory;
 import parkinglot.factory.MallFeeStrategyFactory;
-import parkinglot.factory.TwoWheelerMallFeeStrategy;
+import parkinglot.strategy.TwoWheelerMallFeeStrategy;
 import parkinglot.util.LocalDateTimeUtil;
 
 import java.util.concurrent.atomic.AtomicInteger;

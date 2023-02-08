@@ -1,4 +1,4 @@
-package parkinglot.factory;
+package parkinglot.strategy;
 
 import parkinglot.component.ParkingTicket;
 

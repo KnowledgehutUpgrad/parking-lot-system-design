@@ -1,7 +1,6 @@
 package parkinglot.factory;
 
 import parkinglot.model.FeeModel;
-import parkinglot.model.FeeModelStrategyFactory;
 
 import static parkinglot.model.FeeModel.*;
 

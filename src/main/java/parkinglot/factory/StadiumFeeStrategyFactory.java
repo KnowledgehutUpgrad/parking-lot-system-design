@@ -1,7 +1,9 @@
 package parkinglot.factory;
 
-import parkinglot.model.FeeModelStrategyFactory;
 import parkinglot.model.Vehicle;
+import parkinglot.strategy.FourWheelerStadiumFeeStrategy;
+import parkinglot.strategy.ParkingFeeStrategy;
+import parkinglot.strategy.TwoWheelerStadiumFeeStrategy;
 
 import static parkinglot.model.Vehicle.*;
 

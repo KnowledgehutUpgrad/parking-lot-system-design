@@ -1,7 +1,8 @@
-package parkinglot.factory;
+package parkinglot.strategy;
 
 import org.junit.jupiter.api.Test;
 import parkinglot.component.ParkingTicket;
+import parkinglot.strategy.TwoWheelerMallFeeStrategy;
 import parkinglot.util.LocalDateTimeUtil;
 
 import java.time.LocalDateTime;

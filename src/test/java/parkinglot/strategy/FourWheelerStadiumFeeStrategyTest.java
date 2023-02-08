@@ -1,7 +1,8 @@
-package parkinglot.factory;
+package parkinglot.strategy;
 
 import org.junit.jupiter.api.Test;
 import parkinglot.component.ParkingTicket;
+import parkinglot.strategy.FourWheelerStadiumFeeStrategy;
 import parkinglot.util.LocalDateTimeUtil;
 
 import java.time.LocalDateTime;
@@ -12,8 +13,8 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-class TwoWheelerStadiumFeeStrategyTest {
-    private final TwoWheelerStadiumFeeStrategy twoWheelerStadiumFeeStrategy = new TwoWheelerStadiumFeeStrategy();
+class FourWheelerStadiumFeeStrategyTest {
+    private final FourWheelerStadiumFeeStrategy fourWheelerStadiumFeeStrategy = new FourWheelerStadiumFeeStrategy();
     private final LocalDateTimeUtil localDateTimeUtil = mock(LocalDateTimeUtil.class);
     private final ParkingTicket parkingTicket = new ParkingTicket(localDateTimeUtil, mock(AtomicInteger.class));
 
@@ -23,30 +24,30 @@ class TwoWheelerStadiumFeeStrategyTest {
                 .thenReturn(LocalDateTime.of(2023, 2, 6, 1, 0))
                 .thenReturn(LocalDateTime.of(2023, 2, 6, 4, 59));
 
-        double actualFee = twoWheelerStadiumFeeStrategy.getFee(parkingTicket, "06-Feb-2023 10:00:00");
+        double actualFee = fourWheelerStadiumFeeStrategy.getFee(parkingTicket, "06-Feb-2023 10:00:00");
 
-        assertEquals(30.0, actualFee);
+        assertEquals(60.0, actualFee);
     }
 
     @Test
     void shouldReturnCorrectTotalFeeForParkedHoursBetween4To12() {
         when(localDateTimeUtil.parseToLocalDateTIme(any()))
                 .thenReturn(LocalDateTime.of(2023, 2, 6, 1, 0))
-                .thenReturn(LocalDateTime.of(2023, 2, 6, 6, 59));
+                .thenReturn(LocalDateTime.of(2023, 2, 6, 12, 30));
 
-        double actualFee = twoWheelerStadiumFeeStrategy.getFee(parkingTicket, "06-Feb-2023 10:00:00");
+        double actualFee = fourWheelerStadiumFeeStrategy.getFee(parkingTicket, "06-Feb-2023 10:00:00");
 
-        assertEquals(60.0, actualFee);
+        assertEquals(180.0, actualFee);
     }
 
     @Test
     void shouldReturnCorrectTotalFeeForParkedHoursMoreThan12() {
         when(localDateTimeUtil.parseToLocalDateTIme(any()))
                 .thenReturn(LocalDateTime.of(2023, 2, 6, 1, 0))
-                .thenReturn(LocalDateTime.of(2023, 2, 6, 15, 59));
+                .thenReturn(LocalDateTime.of(2023, 2, 6, 14, 5));
 
-        double actualFee = twoWheelerStadiumFeeStrategy.getFee(parkingTicket, "06-Feb-2023 10:00:00");
+        double actualFee = fourWheelerStadiumFeeStrategy.getFee(parkingTicket, "06-Feb-2023 10:00:00");
 
-        assertEquals(390.0, actualFee);
+        assertEquals(580.0, actualFee);
     }
 }
