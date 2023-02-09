@@ -2,7 +2,6 @@ package parkinglot.strategy;
 
 import org.junit.jupiter.api.Test;
 import parkinglot.component.ParkingTicket;
-import parkinglot.strategy.FourWheelerMallFeeStrategy;
 import parkinglot.util.LocalDateTimeUtil;
 
 import java.time.LocalDateTime;
@@ -23,7 +22,7 @@ class FourWheelerMallFeeStrategyTest {
                 .thenReturn(LocalDateTime.of(2023, 2, 6, 9, 0))
                 .thenReturn(LocalDateTime.of(2023, 2, 6, 10, 0));
 
-        double actualFee = fourWheelerMallFeeModel.getFee(parkingTicket, "06-Feb-2023 10:00:00");
+        double actualFee = fourWheelerMallFeeModel.getFee(parkingTicket, "mocked date");
 
         assertEquals(20.0, actualFee);
     }

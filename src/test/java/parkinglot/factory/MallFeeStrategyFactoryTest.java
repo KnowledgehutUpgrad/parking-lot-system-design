@@ -7,6 +7,7 @@ import parkinglot.strategy.SixWheelerMallFeeStrategy;
 import parkinglot.strategy.TwoWheelerMallFeeStrategy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static parkinglot.model.Vehicle.*;
 
 class MallFeeStrategyFactoryTest {
@@ -62,5 +63,15 @@ class MallFeeStrategyFactoryTest {
         ParkingFeeStrategy parkingFeeStrategy = mallFeeStrategyFactory.getParkingFeeStrategy(TRUCK);
 
         assertEquals(SixWheelerMallFeeStrategy.class, parkingFeeStrategy.getClass());
+    }
+
+    @Test
+    void shouldThrowExceptionIfVehicleNotAllowed() {
+        MallFeeStrategyFactory mallFeeStrategyFactory = new MallFeeStrategyFactory();
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> mallFeeStrategyFactory.getParkingFeeStrategy(CYCLE));
+
+        assertEquals("Vehicle CYCLE not allowed in Mall parking", exception.getMessage());
     }
 }

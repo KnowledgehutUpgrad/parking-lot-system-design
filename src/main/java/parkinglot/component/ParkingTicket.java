@@ -20,6 +20,7 @@ public class ParkingTicket extends Ticket {
                 "Ticket Number: " + ticketNumber + "\n" +
                 "Spot Number: " + spotId + "\n" +
                 "Entry Date-time: " + entryDateTime);
+
         return this;
     }
 

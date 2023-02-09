@@ -2,18 +2,17 @@ package parkinglot.factory;
 
 import parkinglot.model.FeeModel;
 
-import static parkinglot.model.FeeModel.*;
-
 public class FeeModelFactory {
     public FeeModelStrategyFactory getFeeModelStrategyFactory(FeeModel feeModel) {
-        if(feeModel == MALL) {
-            return new MallFeeStrategyFactory();
-        } else if(feeModel == STADIUM){
-            return new StadiumFeeStrategyFactory();
-        } else if(feeModel == AIRPORT){
-            return new AirportFeeStrategyFactory();
-        } else {
-            throw new IllegalArgumentException("Given Fee Model not supported");
+        switch (feeModel) {
+            case MALL:
+                return new MallFeeStrategyFactory();
+            case STADIUM:
+                return new StadiumFeeStrategyFactory();
+            case AIRPORT:
+                return new AirportFeeStrategyFactory();
+            default:
+                throw new IllegalArgumentException("Given Fee Model " + feeModel + " not supported");
         }
     }
 }

@@ -21,6 +21,15 @@ class AirportFeeStrategyFactoryTest {
     }
 
     @Test
+    void ShouldReturnStrategyForTwoWheelerWhenVehicleIsScooter() {
+        AirportFeeStrategyFactory airportFeeStrategyFactory = new AirportFeeStrategyFactory();
+
+        ParkingFeeStrategy parkingFeeStrategy = airportFeeStrategyFactory.getParkingFeeStrategy(SCOOTER);
+
+        assertEquals(TwoWheelerAirportFeeStrategy.class, parkingFeeStrategy.getClass());
+    }
+
+    @Test
     void ShouldReturnStrategyForFourWheelerWhenVehicleIsCar() {
         AirportFeeStrategyFactory airportFeeStrategyFactory = new AirportFeeStrategyFactory();
 
@@ -45,6 +54,6 @@ class AirportFeeStrategyFactoryTest {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () -> airportFeeStrategyFactory.getParkingFeeStrategy(BUS));
 
-        assertEquals("Vehicle not allowed in Airport parking", exception.getMessage());
+        assertEquals("Vehicle BUS not allowed in Airport parking", exception.getMessage());
     }
 }

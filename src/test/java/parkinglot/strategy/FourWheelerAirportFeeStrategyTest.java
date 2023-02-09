@@ -2,7 +2,6 @@ package parkinglot.strategy;
 
 import org.junit.jupiter.api.Test;
 import parkinglot.component.ParkingTicket;
-import parkinglot.strategy.FourWheelerAirportFeeStrategy;
 import parkinglot.util.LocalDateTimeUtil;
 
 import java.time.LocalDateTime;
@@ -24,7 +23,7 @@ class FourWheelerAirportFeeStrategyTest {
                 .thenReturn(LocalDateTime.of(2023, 2, 6, 1, 0))
                 .thenReturn(LocalDateTime.of(2023, 2, 6, 12, 59));
 
-        double actualFee = fourWheelerAirportFeeStrategy.getFee(parkingTicket, "06-Feb-2023 10:00:00");
+        double actualFee = fourWheelerAirportFeeStrategy.getFee(parkingTicket, "mocked date");
 
         assertEquals(60.0, actualFee);
     }
@@ -35,7 +34,7 @@ class FourWheelerAirportFeeStrategyTest {
                 .thenReturn(LocalDateTime.of(2023, 2, 6, 1, 0))
                 .thenReturn(LocalDateTime.of(2023, 2, 6, 23, 59));
 
-        double actualFee = fourWheelerAirportFeeStrategy.getFee(parkingTicket, "06-Feb-2023 10:00:00");
+        double actualFee = fourWheelerAirportFeeStrategy.getFee(parkingTicket, "mocked date");
 
         assertEquals(80.0, actualFee);
     }
@@ -46,7 +45,7 @@ class FourWheelerAirportFeeStrategyTest {
                 .thenReturn(LocalDateTime.of(2023, 2, 6, 1, 0))
                 .thenReturn(LocalDateTime.of(2023, 2, 7, 1, 1));
 
-        double actualFee = fourWheelerAirportFeeStrategy.getFee(parkingTicket, "06-Feb-2023 10:00:00");
+        double actualFee = fourWheelerAirportFeeStrategy.getFee(parkingTicket, "mocked date");
 
         assertEquals(200.0, actualFee);
     }

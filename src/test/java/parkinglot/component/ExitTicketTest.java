@@ -65,6 +65,6 @@ class ExitTicketTest {
     void shouldSetExitDateTime() {
         ExitTicket actualExitTicket = exitTicket.generateExitTicket(MOTORCYCLE, parkingTicket);
 
-        assertEquals("06-Feb-2023 10:00:00", actualExitTicket.exitDateTime);
+        assertEquals("06-Feb-2023 10:00:00", actualExitTicket.getExitDateTime());
     }
 }

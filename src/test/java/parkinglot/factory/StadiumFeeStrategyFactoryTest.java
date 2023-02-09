@@ -44,6 +44,6 @@ class StadiumFeeStrategyFactoryTest {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () -> stadiumFeeStrategyFactory.getParkingFeeStrategy(BUS));
 
-        assertEquals("Vehicle not allowed in Stadium parking", exception.getMessage());
+        assertEquals("Vehicle BUS not allowed in Stadium parking", exception.getMessage());
     }
 }

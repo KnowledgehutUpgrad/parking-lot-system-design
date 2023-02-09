@@ -12,15 +12,20 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class TicketManager {
-    List<ParkingTicket> parkingTickets = new ArrayList<>();
-    LocalDateTimeUtil  localDateTimeUtil;
-    AtomicInteger atomicInteger;
-    FeeModel feeModel;
+    private final List<ParkingTicket> parkingTickets = new ArrayList<>();
+    private final LocalDateTimeUtil localDateTimeUtil;
+    private final AtomicInteger atomicInteger;
+    private final FeeModel feeModel;
+    private final FeeModelFactory feeModelFactory;
 
-    public TicketManager(LocalDateTimeUtil localDateTimeUtil, AtomicInteger  atomicInteger, FeeModel feeModel) {
+    public TicketManager(LocalDateTimeUtil localDateTimeUtil,
+                         AtomicInteger atomicInteger,
+                         FeeModel feeModel,
+                         FeeModelFactory feeModelFactory) {
         this.localDateTimeUtil = localDateTimeUtil;
         this.atomicInteger = atomicInteger;
         this.feeModel = feeModel;
+        this.feeModelFactory = feeModelFactory;
     }
 
     public ParkingTicket getParkingTicket() {
@@ -30,7 +35,7 @@ public class TicketManager {
     }
 
     public ExitTicket getExitTicket() {
-        return new ExitTicket(localDateTimeUtil, new FeeModelFactory(), atomicInteger, feeModel);
+        return new ExitTicket(localDateTimeUtil, feeModelFactory, atomicInteger, feeModel);
     }
 
     public Optional<ParkingTicket> findParkingTicketBy(int ticketNumber) {

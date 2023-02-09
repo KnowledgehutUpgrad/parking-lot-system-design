@@ -7,14 +7,11 @@ import parkinglot.model.Vehicle;
 
 import java.util.Optional;
 
-public class EntranceGate {
+public class EntranceGate extends Gate {
     private static final String NO_SPACE_AVAILABLE = "No space available";
-    private final ParkingSpotManager parkingSpotManager;
-    private final TicketManager ticketManager;
 
     public EntranceGate(ParkingSpotManager parkingSpotManager, TicketManager ticketManager) {
-        this.parkingSpotManager = parkingSpotManager;
-        this.ticketManager = ticketManager;
+        super(parkingSpotManager, ticketManager);
     }
 
     public ParkingTicket park(Vehicle vehicle) {

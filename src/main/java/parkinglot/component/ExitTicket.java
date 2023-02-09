@@ -10,9 +10,9 @@ import parkinglot.util.LocalDateTimeUtil;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ExitTicket extends Ticket {
-    String exitDateTime;
-    FeeModelFactory feeModelFactory;
-    FeeModel feeModel;
+    private String exitDateTime;
+    private final FeeModelFactory feeModelFactory;
+    private final FeeModel feeModel;
 
     public ExitTicket(LocalDateTimeUtil localDateTimeUtil,
                       FeeModelFactory feeModelFactory,
@@ -21,6 +21,10 @@ public class ExitTicket extends Ticket {
         super(localDateTimeUtil, atomicInteger);
         this.feeModelFactory = feeModelFactory;
         this.feeModel = feeModel;
+    }
+
+    public String getExitDateTime() {
+        return exitDateTime;
     }
 
     public ExitTicket generateExitTicket(Vehicle vehicle, ParkingTicket parkingTicket) {

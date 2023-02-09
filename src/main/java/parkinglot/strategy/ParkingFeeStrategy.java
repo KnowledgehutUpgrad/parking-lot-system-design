@@ -12,8 +12,10 @@ public interface ParkingFeeStrategy {
         LocalDateTime entryTime = localDateTimeUtil.parseToLocalDateTIme(parkingTicket.getEntryDateTime());
         LocalDateTime exitTime = localDateTimeUtil.parseToLocalDateTIme(exitDateTime);
 
+        long parkedDurationInSeconds = ChronoUnit.SECONDS.between(entryTime, exitTime);
         double totalSecondPerHour = 60.0 * 60.0;
-        return (long) Math.ceil(ChronoUnit.SECONDS.between(entryTime, exitTime) / totalSecondPerHour);
+
+        return (long) Math.ceil(parkedDurationInSeconds / totalSecondPerHour);
     }
     double getFee(ParkingTicket parkingTicket, String exitDateTime);
 }

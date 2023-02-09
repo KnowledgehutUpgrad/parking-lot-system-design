@@ -3,6 +3,7 @@ package parkinglot.factory;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static parkinglot.model.FeeModel.*;
 
 class FeeModelFactoryTest {
@@ -31,5 +32,15 @@ class FeeModelFactoryTest {
         FeeModelStrategyFactory feeModelStrategyFactory = feeModelFactory.getFeeModelStrategyFactory(AIRPORT);
 
         assertEquals(AirportFeeStrategyFactory.class, feeModelStrategyFactory.getClass());
+    }
+
+    @Test
+    void shouldThrowExceptionIfVehicleNotAllowed() {
+        FeeModelFactory feeModelFactory = new FeeModelFactory();
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> feeModelFactory.getFeeModelStrategyFactory(APARTMENT));
+
+        assertEquals("Given Fee Model APARTMENT not supported", exception.getMessage());
     }
 }

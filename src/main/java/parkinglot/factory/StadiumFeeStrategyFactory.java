@@ -5,16 +5,17 @@ import parkinglot.strategy.FourWheelerStadiumFeeStrategy;
 import parkinglot.strategy.ParkingFeeStrategy;
 import parkinglot.strategy.TwoWheelerStadiumFeeStrategy;
 
-import static parkinglot.model.Vehicle.*;
-
 public class StadiumFeeStrategyFactory implements FeeModelStrategyFactory {
     public ParkingFeeStrategy getParkingFeeStrategy(Vehicle vehicle) {
-        if(vehicle == MOTORCYCLE) {
-            return new TwoWheelerStadiumFeeStrategy();
-        } else if(vehicle == CAR || vehicle == SUV){
-            return new FourWheelerStadiumFeeStrategy();
-        } else {
-            throw new IllegalArgumentException("Vehicle not allowed in Stadium parking");
+        switch (vehicle) {
+            case MOTORCYCLE:
+            case SCOOTER:
+                return new TwoWheelerStadiumFeeStrategy();
+            case CAR:
+            case SUV:
+                return new FourWheelerStadiumFeeStrategy();
+            default:
+                throw new IllegalArgumentException("Vehicle " + vehicle + " not allowed in Stadium parking");
         }
     }
 }
