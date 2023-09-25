@@ -1,9 +1,9 @@
 # parking-lot-system-design
 
-Command to build the project
+**Command to build the project**
 
-./gradlew clean build
+```./gradlew clean build```
 
-Sample command to run tests:
+**Sample command to run tests:**
 
-./gradlew test
+```./gradlew test```
