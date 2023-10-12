@@ -1,9 +1,21 @@
 # parking-lot-system-design
 
-**Command to build the project**
+# Parking Lot Java Project
 
-```./gradlew clean build```
+This is a Java project for a parking lot management system. It allows you to create, manage, and optimize a parking lot's operations.
 
-**Sample command to run tests:**
+## Building the Project
 
-```./gradlew test```
+To build the project, run the following command:
+
+```
+./gradlew clean build
+```
+
+## Running Tests
+
+You can run the project's tests using the following command:
+
+```
+./gradlew test
+```
